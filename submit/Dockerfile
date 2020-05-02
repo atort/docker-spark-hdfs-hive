@@ -1,0 +1,11 @@
+FROM bde2020/spark-submit:2.4.5-hadoop2.7
+
+ENV SPARK_APPLICATION_JAR_NAME test
+ENV SPARK_MASTER_NAME spark-master
+ENV SPARK_MASTER_PORT 7077
+ENV SPARK_APPLICATION_JAR_LOCATION /opt/spark-apps/test.jar
+ENV SPARK_APPLICATION_MAIN_CLASS com.example.spark.Test
+ENV SPARK_APPLICATION_ARGS ""
+
+
+CMD ["/bin/bash", "/submit.sh"]

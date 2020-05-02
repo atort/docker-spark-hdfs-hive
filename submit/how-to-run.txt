@@ -1,0 +1,2 @@
+docker run --name wordcounts --network docker-hadoop-hive-parquet_default -e ENABLE_INIT_DAEMON=false --link docker-hadoop-hive-parquet_spark-master_1:spark-master -v /home/ator/Personal_Projects/docker_spark/apps:/opt/spark-apps -v /home/ator/Personal_Projects/docker_spark/data:/opt/spark-data --env SPARK_APPLICATION_JAR_LOCATION="/opt/spark-apps/wordcount-1.0.0.jar" --env SPARK_APPLICATION_MAIN_CLASS="com.example.spark.JavaWordCount" --env SPARK_APPLICATION_ARGS="/opt/spark-data/input.txt /opt/spark-data/output2.txt" -d bde/spark-app
+
