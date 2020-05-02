@@ -49,3 +49,20 @@ docker exec -it  docker-spark-hdfs-hive_hive-server_1 bash
 ```
 
 ## Enviar aplicaciones spark al cluster
+
+* Crear imagen de docker para enviar aplicaciones al cluster de sparK:
+```
+cd submit
+docker build --rm=true -t bde/spark-app .
+```
+* Arrancar docker con la aplicación a enviar:
+```
+docker run --name wordcounts --network docker-spark-hdfs-hive_default -e ENABLE_INIT_DAEMON=false --link docker-spark-hdfs-hive_spark-master_1:spark-master -v /home/ator/Personal_Projects/docker_spark/apps:/opt/spark-apps -v /home/ator/Personal_Projects/docker_spark/data:/opt/spark-data --env SPARK_APPLICATION_JAR_LOCATION="/opt/spark-apps/wordcount-1.0.0.jar" --env SPARK_APPLICATION_MAIN_CLASS="com.example.spark.JavaWordCount" --env SPARK_APPLICATION_ARGS="/opt/spark-data/input.txt /opt/spark-data/output2.txt" -d bde/spark-app
+```
+  - Parámetros:
+    * --name <nombre_del_docker_de_la_app>
+    * --network <nombre de la network del cluster>
+    * -v <volumes donde está la app a ejecutarse>
+    * --env SPARK_APPLICATION_JAR_LOCATION
+    * --env SPARK_APPLICATION_MAIN_CLASS
+    * --env SPARK_APPLICATION_ARGS
